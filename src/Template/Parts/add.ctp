@@ -9,16 +9,16 @@
     </ul>
 </nav>
 <div class="parts form large-9 medium-8 columns content">
-    <?= $this->Form->create($part) ?>
+    <?= $this->Form->create($part, ['type' => 'file']) ?>
     <fieldset>
         <legend><?= __('Add Part') ?></legend>
         <?php
             echo $this->Form->input('name');
-            echo $this->Form->input('photo');
+            echo $this->Form->input('photo', ['type' => 'file']);
             echo $this->Form->input('description');
             echo $this->Form->input('price');
             echo $this->Form->input('category_id', ['options' => $categories]);
-            echo $this->Form->input('orders._ids', ['options' => $orders]);
+            echo $this->Form->input('orders._ids', ['options' => $orders, 'type' => 'hidden']);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

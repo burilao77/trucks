@@ -16,15 +16,43 @@ class VehiclesController extends AppController
      *
      * @return \Cake\Network\Response|null
      */
+    public $paginate = [
+        'contain' => ['Types'],
+        'limit' => 4
+
+    ];
+
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Paginator');
+    }
+
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Types']
-        ];
+
         $vehicles = $this->paginate($this->Vehicles);
 
         $this->set(compact('vehicles'));
         $this->set('_serialize', ['vehicles']);
+
+        if($search = $this->request->query('q')){
+
+            $conditions = array(
+                'conditions' => array(
+                    'or' => array(
+                        'Vehicles.id LIKE' => "%$search%",
+                        'Vehicles.name LIKE' => "%$search%",
+                        'Vehicles.price LIKE' => "%$search%",
+                    )
+                )
+            );
+
+            $this->set('vehicles', $this->paginate($this->Vehicles->find('all', $conditions)));
+
+         }else{
+            $this->set('vehicles', $this->paginate($this->Vehicles));
+         }
     }
 
     /**
@@ -55,7 +83,7 @@ class VehiclesController extends AppController
         if ($this->request->is('post')) {
             $vehicle = $this->Vehicles->patchEntity($vehicle, $this->request->data);
             if ($this->Vehicles->save($vehicle)) {
-                $this->Flash->success(__('The vehicle has been saved.'));
+                $this->Flash->success(__('El Vehiculo fue guardado con Exito.'));
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The vehicle could not be saved. Please, try again.'));

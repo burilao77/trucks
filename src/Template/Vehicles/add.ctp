@@ -15,10 +15,11 @@
         <?php
             echo $this->Form->input('name');
             echo $this->Form->input('photo', ['type' => 'file']);
+
             echo $this->Form->input('description');
             echo $this->Form->input('price');
             echo $this->Form->input('type_id', ['options' => $types]);
-            echo $this->Form->input('orders._ids', ['options' => $orders]);
+            echo $this->Form->input('orders._ids', ['options' => $orders, 'type' => 'hidden']);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

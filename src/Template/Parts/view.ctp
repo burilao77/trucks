@@ -20,7 +20,7 @@
         </tr>
         <tr>
             <th><?= __('Photo') ?></th>
-            <td><?= h($part->photo) ?></td>
+            <td><?= $this->Html->link('../files/Parts/photo/' . '/' . $part->photo) ?></td>
         </tr>
         <tr>
             <th><?= __('Category') ?></th>

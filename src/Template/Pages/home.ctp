@@ -1,244 +1,321 @@
-<?php
-/**
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @since         0.10.0
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */
-use Cake\Cache\Cache;
-use Cake\Core\Configure;
-use Cake\Core\Plugin;
-use Cake\Datasource\ConnectionManager;
-use Cake\Error\Debugger;
-use Cake\Network\Exception\NotFoundException;
-
-$this->layout = false;
-
-if (!Configure::read('debug')):
-    throw new NotFoundException('Please replace src/Template/Pages/home.ctp with your own version.');
-endif;
-
-$cakeDescription = 'CakePHP: the rapid development PHP framework';
-?>
+<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
 <!DOCTYPE html>
 <html>
 <head>
-    <?= $this->Html->charset() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <?= $cakeDescription ?>
-    </title>
-    <?= $this->Html->meta('icon') ?>
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('cake.css') ?>
+<title>Truck a Transport Category Flat Bootstarp responsive Website Template| Home :: w3layouts</title>
 </head>
-<body class="home">
-    <header>
-        <div class="header-image">
-            <?= $this->Html->image('http://cakephp.org/img/cake-logo.png') ?>
-            <h1>Get the Ovens Ready</h1>
-        </div>
-    </header>
-    <div id="content">
-        <div class="row">
-            <div class="columns large-12 ctp-warning checks">
-                Please be aware that this page will not be shown if you turn off debug mode unless you replace src/Template/Pages/home.ctp with your own version.
-            </div>
-            <?php Debugger::checkSecurityKeys(); ?>
-            <div id="url-rewriting-warning" class="columns large-12 url-rewriting checks">
-                <p class="problem">URL rewriting is not properly configured on your server.</p>
-                <p>
-                    1) <a target="_blank" href="http://book.cakephp.org/3.0/en/installation.html#url-rewriting">Help me configure it</a>
-                </p>
-                <p>
-                    2) <a target="_blank" href="http://book.cakephp.org/3.0/en/development/configuration.html#general-configuration">I don't / can't use URL rewriting</a>
-                </p>
-            </div>
+<body>
+    <!-- banner -->
+    <div id="home" class="banner a-banner">
+        <!-- container -->
+        <div class="container">
+            <div class="header">
+                <div class="head-logo">
+                    <a href="index.html"><img src="images/logo.png" alt="" /></a>
+                </div>
+                <div class="top-nav">
+                    <span class="menu"><img src="images/menu.png" alt=""></span>
+                    <ul class="nav1">
+                        <li class="hvr-sweep-to-bottom active"><a <?= $this->Html->link(__('Inicio'), ['controller' => 'Pages', 'action' => 'home'])?> <center><img src="images/nav-but1.png" alt=""/></center><i>
+                        </i></a>
+                        </li>
 
-            <div class="columns large-12 checks">
-                <h4>Environment</h4>
-                <?php if (version_compare(PHP_VERSION, '5.5.9', '>=')): ?>
-                    <p class="success">Your version of PHP is 5.5.9 or higher (detected <?= phpversion() ?>).</p>
-                <?php else: ?>
-                    <p class="problem">Your version of PHP is too low. You need PHP 5.5.9 or higher to use CakePHP (detected <?= phpversion() ?>).</p>
-                <?php endif; ?>
+                        <li class="hvr-sweep-to-bottom"><a <?= $this->Html->link(__('Nosotros'), ['controller' => 'Users', 'action' => 'index'])?> <center><img src="images/nav-but2.png" alt=""/></center><i>
+                        </i></a>
+                        </li>
+                        <li class="hvr-sweep-to-bottom"><a <?= $this->Html->link(__('Repuestos'), ['controller' => 'Parts', 'action' => 'index'])?> <center><img src="images/nav-but3.png" alt=""/></center><i>
+                        </i></a>
+                        </li>
+                        <li class="hvr-sweep-to-bottom"><a <?= $this->Html->link(__('Camiones'), ['controller' => 'Vehicles', 'action' => 'index'])?> <center><img src="images/nav-but4.png" alt=""/></center><i>
+                        </i></a>
+                        </li>
+                        <li class="hvr-sweep-to-bottom"><a <?= $this->Html->link(__('Contactanos'), ['controller' => 'Orders', 'action' => 'add'])?> <center><img src="images/nav-but5.png" alt=""/></center><i>
+                        </i></a>
+                        </li>
 
-                <?php if (extension_loaded('mbstring')): ?>
-                    <p class="success">Your version of PHP has the mbstring extension loaded.</p>
-                <?php else: ?>
-                    <p class="problem">Your version of PHP does NOT have the mbstring extension loaded.</p>;
-                <?php endif; ?>
-
-                <?php if (extension_loaded('openssl')): ?>
-                    <p class="success">Your version of PHP has the openssl extension loaded.</p>
-                <?php elseif (extension_loaded('mcrypt')): ?>
-                    <p class="success">Your version of PHP has the mcrypt extension loaded.</p>
-                <?php else: ?>
-                    <p class="problem">Your version of PHP does NOT have the openssl or mcrypt extension loaded.</p>
-                <?php endif; ?>
-
-                <?php if (extension_loaded('intl')): ?>
-                    <p class="success">Your version of PHP has the intl extension loaded.</p>
-                <?php else: ?>
-                    <p class="problem">Your version of PHP does NOT have the intl extension loaded.</p>
-                <?php endif; ?>
-                <hr>
-
-                <h4>Filesystem</h4>
-                <?php if (is_writable(TMP)): ?>
-                    <p class="success">Your tmp directory is writable.</p>
-                <?php else: ?>
-                    <p class="problem">Your tmp directory is NOT writable.</p>
-                <?php endif; ?>
-
-                <?php if (is_writable(LOGS)): ?>
-                    <p class="success">Your logs directory is writable.</p>
-                <?php else: ?>
-                    <p class="problem">Your logs directory is NOT writable.</p>
-                <?php endif; ?>
-
-                <?php $settings = Cache::config('_cake_core_'); ?>
-                <?php if (!empty($settings)): ?>
-                    <p class="success">The <em><?= $settings['className'] ?>Engine</em> is being used for core caching. To change the config edit config/app.php</p>
-                <?php else: ?>
-                    <p class="problem">Your cache is NOT working. Please check the settings in config/app.php</p>
-                <?php endif; ?>
-
-                <hr>
-                <h4>Database</h4>
-                <?php
-                    try {
-                        $connection = ConnectionManager::get('default');
-                        $connected = $connection->connect();
-                    } catch (Exception $connectionError) {
-                        $connected = false;
-                        $errorMsg = $connectionError->getMessage();
-                        if (method_exists($connectionError, 'getAttributes')):
-                            $attributes = $connectionError->getAttributes();
-                            if (isset($errorMsg['message'])):
-                                $errorMsg .= '<br />' . $attributes['message'];
-                            endif;
-                        endif;
-                    }
-                ?>
-                <?php if ($connected): ?>
-                    <p class="success">CakePHP is able to connect to the database.</p>
-                <?php else: ?>
-                    <p class="problem">CakePHP is NOT able to connect to the database.<br /><br /><?= $errorMsg ?></p>
-                <?php endif; ?>
-
-                <hr>
-                <h4>DebugKit</h4>
-                <?php if (Plugin::loaded('DebugKit')): ?>
-                    <p class="success">DebugKit is loaded.</p>
-                <?php else: ?>
-                    <p class="problem">DebugKit is NOT loaded. You need to either install pdo_sqlite, or define the "debug_kit" connection name.</p>
-                <?php endif; ?>
+                        <div class="clearfix"> </div>
+                    </ul>
+                    <!-- script-for-menu -->
+                             <script>
+                               $( "span.menu" ).click(function() {
+                                 $( "ul.nav1" ).slideToggle( 300, function() {
+                                 // Animation complete.
+                                  });
+                                 });
+                            </script>
+                        <!-- /script-for-menu -->
+                </div>
+                <div class="clearfix"> </div>
             </div>
         </div>
+        <!-- //container -->
+        <div class="container">
+                <script src="js/responsiveslides.min.js"></script>
+                     <script>
+                        // You can also use "$(window).load(function() {"
+                        $(function () {
+                          // Slideshow 4
+                          $("#slider3").responsiveSlides({
+                            auto: true,
+                            pager: true,
+                            nav: false,
+                            speed: 500,
+                            namespace: "callbacks",
+                            before: function () {
+                              $('.events').append("<li>before event fired.</li>");
+                            },
+                            after: function () {
+                              $('.events').append("<li>after event fired.</li>");
+                            }
+                          });
 
-        <div class="row">
-            <div class="columns large-6">
-                <h3>Editing this Page</h3>
-                <ul>
-                    <li>To change the content of this page, edit: src/Template/Pages/home.ctp.</li>
-                    <li>You can also add some CSS styles for your pages at: webroot/css/.</li>
-                </ul>
-            </div>
-            <div class="columns large-6">
-                <h3>Getting Started</h3>
-                <ul>
-                    <li><a target="_blank" href="http://book.cakephp.org/3.0/en/">CakePHP 3.0 Docs</a></li>
-                    <li><a target="_blank" href="http://book.cakephp.org/3.0/en/tutorials-and-examples/bookmarks/intro.html">The 15 min Bookmarker Tutorial</a></li>
-                    <li><a target="_blank" href="http://book.cakephp.org/3.0/en/tutorials-and-examples/blog/blog.html">The 15 min Blog Tutorial</a></li>
-                </ul>
-                <p>
-            </div>
-        </div>
-        <hr/>
-
-        <div class="row">
-            <div class="columns large-12">
-                <h3 class="">More about Cake</h3>
-                <p>
-                    CakePHP is a rapid development framework for PHP which uses commonly known design patterns like Front Controller and MVC.
-                </p>
-                <p>
-                    Our primary goal is to provide a structured framework that enables PHP users at all levels to rapidly develop robust web applications, without any loss to flexibility.
-                </p>
-
-                <h3>Help and Bug Reports</h3>
-                <ul>
+                        });
+                      </script>
+            <div  id="top" class="callbacks_container">
+                <ul class="rslides" id="slider3">
                     <li>
-                        <a href="irc://irc.freenode.net/cakephp">irc.freenode.net #cakephp</a>
-                        <ul><li>Live chat about CakePHP</li></ul>
+                        <div class="banner-info">
+                                <h2>Where you <span> always </span> find great truck journey</h2>
+                                <div class="line"> </div>
+                                <p>Ut sodales erat tortor, eget rhoncus nulla rutrum sit amet. Aliquam sit amet lorem dui. Nulla sagittis dolor id mi tincidunt varius. Donec quis suscipit tortor vel pellentesque libero</p>
+                        </div>
                     </li>
                     <li>
-                        <a href="https://github.com/cakephp/cakephp/issues">CakePHP Issues</a>
-                        <ul><li>CakePHP issues and pull requests</li></ul>
+                        <div class="banner-info">
+                                <h2>Make your <span> journey </span> truck in United Kingdom</h2>
+                                <div class="line"> </div>
+                                <p>Eget rhoncus nulla rutrum sit amet. Ut sodales erat tortor Aliquam sit amet lorem dui. Donec quis suscipit tortor vel pellentesque libero Nulla sagittis dolor id mi tincidunt varius</p>
+                        </div>
                     </li>
                     <li>
-                        <a href="https://groups.google.com/group/cake-php">CakePHP Google Group</a>
-                        <ul><li>Community mailing list</li></ul>
-                    </li>
-                </ul>
-
-                <h3>Docs and Downloads</h3>
-                <ul>
-                    <li>
-                        <a href="http://api.cakephp.org/3.0/">CakePHP API</a>
-                        <ul><li>Quick Reference</li></ul>
-                    </li>
-                    <li>
-                        <a href="http://book.cakephp.org/3.0/en/">CakePHP Documentation</a>
-                        <ul><li>Your Rapid Development Cookbook</li></ul>
-                    </li>
-                    <li>
-                        <a href="http://bakery.cakephp.org">The Bakery</a>
-                        <ul><li>Everything CakePHP</li></ul>
-                    </li>
-                    <li>
-                        <a href="http://plugins.cakephp.org">CakePHP plugins repo</a>
-                        <ul><li>A comprehensive list of all CakePHP plugins created by the community</li></ul>
-                    </li>
-                    <li>
-                        <a href="https://github.com/cakephp/">CakePHP Code</a>
-                        <ul><li>For the Development of CakePHP Git repository, Downloads</li></ul>
-                    </li>
-                    <li>
-                        <a href="https://github.com/FriendsOfCake/awesome-cakephp">CakePHP Awesome List</a>
-                        <ul><li>A curated list of amazingly awesome CakePHP plugins, resources and shiny things.</li></ul>
-                    </li>
-                    <li>
-                        <a href="http://www.cakephp.org">CakePHP</a>
-                        <ul><li>The Rapid Development Framework</li></ul>
-                    </li>
-                </ul>
-
-                <h3>Training and Certification</h3>
-                <ul>
-                    <li>
-                        <a href="http://cakefoundation.org/">Cake Software Foundation</a>
-                        <ul><li>Promoting development related to CakePHP</li></ul>
-                    </li>
-                    <li>
-                        <a href="http://training.cakephp.org/">CakePHP Training</a>
-                        <ul><li>Learn to use the CakePHP framework</li></ul>
-                    </li>
-                    <li>
-                        <a href="http://certification.cakephp.org/">CakePHP Certification</a>
-                        <ul><li>Become a certified CakePHP developer</li></ul>
+                        <div class="banner-info">
+                                <h2>Provider <span> Volvo Trucks </span> truck in Ukraine</h2>
+                                <div class="line"> </div>
+                                <p>Eget rhoncus nulla rutrum sit amet. Ut sodales erat tortor Aliquam sit amet lorem dui. Donec quis suscipit tortor vel pellentesque libero Nulla sagittis dolor id mi tincidunt varius</p>
+                        </div>
                     </li>
                 </ul>
             </div>
         </div>
+    </div>
+    <!-- //banner -->
+    <!-- banner-bottom -->
+    <div class="banner-bottom">
+        <!-- container -->
+        <div class="container">
+            <div class="banner-bottom-grids">
+                <div class="col-md-7 banner-bottom-grid-text">
+                    <div class="jumbotron banner-bottom-left wow fadeInLeft animated" data-wow-delay="0.5s" style="visibility: visible; -webkit-animation-delay: 0.5s;  ">
+                      <h3>Nullam consectetur tristique fermentum vestibulum</h3>
+                        <h5>Cras porttitor imperdiet volutpat. Nulla malesuada lectus eros ut convallis felis <span>consectetur ut</span></h5>
+                        <p>Proin eget ipsum ultrices, aliquet velit eget, tempus tortor. Phasellus non velit sit amet diam faucibus molestie. Mauris sapien eros, mattis et elit non, tincidunt efficitur nisi augue dui iaculis nulla, a pretium nisl turpis vel augue auctor viverra aliquam .</p>
+                        <div class="see-button">
+                            <a class="btn btn-primary btn-lg see-button hvr-shutter-out-horizontal" href="about.html" role="button">See More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 banner-bottom-right wow fadeInRight animated" data-wow-delay="0.5s" style="visibility: visible; -webkit-animation-delay: 0.5s;">
+                    <img src="images/2.jpg" alt=""/>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+        <!-- //container -->
+    </div>
+    <!-- //banner-bottom -->
+    <!-- specialty -->
+    <div class="specialty">
+        <!-- container -->
+        <div class="container">
+            <div class="col-md-5 specialty-info wow fadeInLeft animated" data-wow-delay="0.5s" style="visibility: visible; -webkit-animation-delay: 0.5s;">
+                <h3>Our Services</h3>
+                <h5>Cras porttitor imperdiet volutpat nulla malesuada lectus eros ut convallis felis consectetur ut </h5>
+                <p>Integer vitae ligula sed lectus consectetur pellentesque blandit nec orci. Nulla ultricies nunc et lorem semper, quis accumsan dui aliquam aucibus sagittis placerat.
+                    <span>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi non nibh nec enim sollicitudin interdum.tristique senectus et netus et malesuada fames ac turpis egestas</span>
+                </p>
+                <div class="see-button">
+                    <a class="btn btn-primary btn-lg see-button hvr-shutter-out-horizontal specialty-button" href="services.html" role="button">See More</a>
+                </div>
+            </div>
+            <div class="col-md-7 specialty-grids">
+                <div class="specialty-grids-top">
+                    <div class="col-md-6 service-box wow fadeInRight animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
+                        <figure class="icon">
+                            <img src="images/1.png" alt="" />
+                        </figure>
+                        <h5>Proin eget ipsum ultrices</h5>
+                        <p>Sed ut perspiciis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+                    </div>
+                    <div class="col-md-6 service-box wow fadeInLeft animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
+                        <figure class="icon">
+                            <img src="images/2.png" alt="" />
+                        </figure>
+                        <h5>Proin eget ipsum ultrices</h5>
+                        <p>Sed ut perspiciis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="specialty-grids-top">
+                    <div class="col-md-6 service-box wow fadeInRight animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
+                        <figure class="icon">
+                            <img src="images/3.png" alt="" />
+                        </figure>
+                        <h5>Proin eget ipsum ultrices</h5>
+                        <p>Sed ut perspiciis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+                    </div>
+                    <div class="col-md-6 service-box wow fadeInLeft animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
+                        <figure class="icon">
+                            <img src="images/4.png" alt="" />
+                        </figure>
+                        <h5>Proin eget ipsum ultrices</h5>
+                        <p>Sed ut perspiciis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <!-- //container -->
+    </div>
+    <!-- //specialty -->
+    <!-- testimonials -->
+    <div class="testimonials">
+        <div class="container">
+            <div class="testimonial-nfo wow fadeInLeft animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
+                <h3>Testimonials</h3>
+                <h5>Cras porttitor imperdiet volutpat nulla malesuada lectus eros <span>ut convallis felis consectetur ut </span></h5>
+            </div>
+            <div class="testimonial-grids wow fadeInRight animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
+                <div class="testimonial-grid">
+                    <p><span>"</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fermentum iaculis diam quis sodales. Vestibulum eu dui tellus. In viverra porttitor auctor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas<span> "</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //testimonials -->
+    <!-- news -->
+    <div class="news">
+        <div class="container">
+            <div class="news-text">
+                <h3>News</h3>
+                <h5>Cras porttitor imperdiet volutpat nulla malesuada lectus eros <span>ut convallis felis consectetur ut </span></h5>
+            </div>
+            <div class="news-grids">
+                <div class="col-md-3 news-grid wow fadeInLeft animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
+                    <a href="single.html"><h4>Integer vitae ligula sed lectus</h4></a>
+                    <span>8.00 - 10.00 | JUN 09,2014</span>
+                    <img src="images/img1.jpg" alt="" />
+                    <div class="news-info">
+                        <p>Pellentesque ut urna eu mauris scele risque auctor volutpat et massa pers piciis iste natus scele risque auctor volutpat et massa.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 news-grid wow fadeInLeft animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
+                    <a href="single.html"><h4>Integer vitae ligula sed lectus</h4></a>
+                    <span>10.00 - 12.00 | sep 24,2014</span>
+                    <img src="images/img2.jpg" alt="" />
+                    <div class="news-info">
+                        <p>Pellentesque ut urna eu mauris scele risque auctor volutpat et massa pers piciis iste natus scele risque auctor volutpat et massa.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 news-grid wow fadeInRight animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
+                    <a href="single.html"><h4>Integer vitae ligula sed lectus</h4></a>
+                    <span>9.00 - 10.00 | FEB 15,2014</span>
+                    <img src="images/img3.jpg" alt="" />
+                    <div class="news-info">
+                        <p>Pellentesque ut urna eu mauris scele risque auctor volutpat et massa pers piciis iste natus scele risque auctor volutpat et massa.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 news-grid wow fadeInRight animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
+                    <a href="single.html"><h4>Integer vitae ligula sed lectus</h4></a>
+                    <span>11.00 - 10.00 | JUN 10,2014</span>
+                    <img src="images/img4.jpg" alt="" />
+                    <div class="news-info">
+                        <p>Pellentesque ut urna eu mauris scele risque auctor volutpat et massa pers piciis iste natus scele risque auctor volutpat et massa.</p>
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+    <!-- //news -->
+    <!-- footer -->
+    <div class="footer">
+        <!-- container -->
+        <div class="container">
+            <div class="col-md-6 footer-left  wow fadeInLeft animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="mail.html">Mail Us</a></li>
+                </ul>
+                <form>
+                    <input type="text" placeholder="Email" required="">
+                    <input type="submit" value="Subscribe">
+                </form>
+            </div>
+            <div class="col-md-3 footer-middle wow bounceIn animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
+                <h3>Address</h3>
+                <div class="address">
+                    <p>756 gt globel Place,
+                        <span>CD-Road,M 07 435.</span>
+                    </p>
+                </div>
+                <div class="phone">
+                    <p>+1(100)2345-6789</p>
+                </div>
+            </div>
+            <div class="col-md-3 footer-right  wow fadeInRight animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
+                <a href="#"><img src="images/logo.png" alt="" /></a>
+                <p>Proin eget ipsum ultrices, aliquet velit eget, tempus tortor. Phasellus non velit sit amet diam faucibus molestie tincidunt efficitur nisi.</p>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <!-- //container -->
+    </div>
+    <!-- //footer -->
+    <div class="copyright">
+        <!-- container -->
+        <div class="container">
+            <div class="copyright-left wow fadeInLeft animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
+                <p>© 2015 Truck. Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+            </div>
+            <div class="copyright-right wow fadeInRight animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
+                <ul>
+                    <li><a href="#" class="twitter"> </a></li>
+                    <li><a href="#" class="twitter facebook"> </a></li>
+                    <li><a href="#" class="twitter chrome"> </a></li>
+                    <li><a href="#" class="twitter pinterest"> </a></li>
+                    <li><a href="#" class="twitter linkedin"> </a></li>
+                    <li><a href="#" class="twitter dribbble"> </a></li>
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+            <script type="text/javascript">
+                                    $(document).ready(function() {
+                                        /*
+                                        var defaults = {
+                                            containerID: 'toTop', // fading element id
+                                            containerHoverID: 'toTopHover', // fading element hover id
+                                            scrollSpeed: 1200,
+                                            easingType: 'linear'
+                                        };
+                                        */
+
+                                        $().UItoTop({ easingType: 'easeOutQuart' });
+
+                                    });
+                                </script>
+        <a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+
+        </div>
+        <!-- //container -->
     </div>
 </body>
 </html>

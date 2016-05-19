@@ -16,15 +16,43 @@ class PartsController extends AppController
      *
      * @return \Cake\Network\Response|null
      */
+
+    public $paginate = [
+        'contain' => ['Categories'],
+        'limit' => 4
+
+    ];
+
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Paginator');
+    }
+
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Categories']
-        ];
+
         $parts = $this->paginate($this->Parts);
 
         $this->set(compact('parts'));
         $this->set('_serialize', ['parts']);
+        if($search = $this->request->query('q')){
+
+        $conditions = array(
+                'conditions' => array(
+                    'or' => array(
+                        'Parts.id LIKE' => "%$search%",
+                        'Parts.name LIKE' => "%$search%",
+                        'Parts.price LIKE' => "%$search%",
+                    )
+                )
+            );
+
+            $this->set('parts', $this->paginate($this->Parts->find('all', $conditions)));
+
+         }else{
+            $this->set('parts', $this->paginate($this->Parts));
+         }
     }
 
     /**

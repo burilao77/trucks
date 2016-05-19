@@ -41,6 +41,16 @@ class PartsTable extends Table
             'targetForeignKey' => 'order_id',
             'joinTable' => 'orders_parts'
         ]);
+        $this->addBehavior('Josegonzalez/Upload.Upload', [
+
+            'photo' => [
+
+            ]
+        ]);
+        $part = new Part([
+        'photo' => 'imageFile.jpg',
+
+        ]);
     }
 
     /**

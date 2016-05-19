@@ -43,10 +43,13 @@ class VehiclesTable extends Table
         ]);
         $this->addBehavior('Josegonzalez/Upload.Upload', [
 
-            'photo' => []
+            'photo' => [
+
+            ]
         ]);
      $vehicle = new Vehicle([
-        'photo' => 'imageFile.jpg'
+        'photo' => 'imageFile.jpg',
+
         ]);
     }
 

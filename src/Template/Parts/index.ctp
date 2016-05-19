@@ -1,38 +1,50 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Part'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Categories'), ['controller' => 'Categories', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Category'), ['controller' => 'Categories', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Orders'), ['controller' => 'Orders', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Order'), ['controller' => 'Orders', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="parts index large-9 medium-8 columns content">
-    <h3><?= __('Parts') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+<?php echo $this->element('menu/navar_parts') ?>
+<div class="about-top">
+<div class="container">
+<div class="about-info wow fadeInLeft animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
+<h3>Repuestos y Partes</h3>
+
+</div>
+    <div class="col-md-6">
+        <div id="custom-search-input">
+            <div class="input-group col-md-12">
+                <span class="input-group-btn">
+        <?= $this->Util->search($this->Form) ?>
+                </span>
+
+        <?php
+           if($search = $this->request->query('q')){
+               echo 'Filtrando por: '.$search.' - '.$this->Html->link(__('Ver todos'), ['action' => 'index']);
+           }
+        ?>
+            </div>
+        </div>
+    </div>
+
+
+
+<div class="vehicles index large-12 medium-8 columns ">
+    <table class="table table-bordered">
         <thead>
             <tr>
-                <th><?= $this->Paginator->sort('id') ?></th>
-                <th><?= $this->Paginator->sort('name') ?></th>
-                <th><?= $this->Paginator->sort('photo') ?></th>
-                <th><?= $this->Paginator->sort('price') ?></th>
-                <th><?= $this->Paginator->sort('category_id') ?></th>
-                <th><?= $this->Paginator->sort('created') ?></th>
-                <th><?= $this->Paginator->sort('modified') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
+
+                <th><?= $this->Paginator->sort('Nombre') ?></th>
+                <th><?= $this->Paginator->sort('Foto') ?></th>
+                <th><?= $this->Paginator->sort('Precio') ?></th>
+                <th><?= $this->Paginator->sort('Categoria') ?></th>
+
+                <th class="actions"><?= __('Acciones') ?></th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($parts as $part): ?>
             <tr>
-                <td><?= $this->Number->format($part->id) ?></td>
+
                 <td><?= h($part->name) ?></td>
-                <td><?= h($part->photo) ?></td>
+                <td><?= $this->Html->image('../files/Parts/photo/' .  '/' . $part->photo) ?></td>
                 <td><?= $this->Number->format($part->price) ?></td>
                 <td><?= $part->has('category') ? $this->Html->link($part->category->title, ['controller' => 'Categories', 'action' => 'view', $part->category->id]) : '' ?></td>
-                <td><?= h($part->created) ?></td>
-                <td><?= h($part->modified) ?></td>
+
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $part->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $part->id]) ?>
@@ -42,12 +54,16 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+<nav>
     <div class="paginator">
         <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->prev('< ' . __('Atras')) ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
+            <?= $this->Paginator->next(__('Siguiente') . ' >') ?>
         </ul>
-        <p><?= $this->Paginator->counter() ?></p>
     </div>
+</nav>
 </div>
+</div>
+</div>
+<?= $this->element('menu/footer') ?>
