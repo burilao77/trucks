@@ -27,7 +27,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->meta('icon') ?>
 
     <?= $this->Html->css(['bootstrap','style', 'base']) ?>
-    <?= $this->Html->script('jquery-1.11.1.min') ?>
+    <?= $this->Html->script(['jquery-1.11.1.min','bootstrap.min']) ?>
     <?= $this->Html->css('http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,800,700,600') ?>
     <?= $this->Html->css('animate') ?>
      <?= $this->Html->script(['wow.min', 'move-top', 'easing', 'responsiveslides.min']) ?>
