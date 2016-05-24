@@ -6,6 +6,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Search\Manager;
 
 /**
  * Parts Model
@@ -26,6 +27,7 @@ class PartsTable extends Table
     {
         parent::initialize($config);
 
+          $this->addBehavior('Search.Search');
         $this->table('parts');
         $this->displayField('name');
         $this->primaryKey('id');
@@ -96,5 +98,25 @@ class PartsTable extends Table
     {
         $rules->add($rules->existsIn(['category_id'], 'Categories'));
         return $rules;
+    }
+
+    public function searchConfiguration()
+    {
+     $search = new Manager($this);
+    $search
+    ->add('part_id', 'Search.Value', [
+
+        'field' => $this->alias() . '.part_id'
+    ])
+    ->add('P', 'Search.Like', [
+        //'Users.id Search.Like' => "%$search%",
+        //'Users.first_name Search.Like' => "%$search%",
+        'before' => true,
+        'after' => true,
+        'field' => [$this->alias('Name'),('Photo'),('Price')]
+
+
+    ]);
+    return $search;
     }
 }

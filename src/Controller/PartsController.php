@@ -2,7 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\Event\Event;
 /**
  * Parts Controller
  *
@@ -29,6 +29,33 @@ class PartsController extends AppController
         $this->loadComponent('Paginator');
     }
 
+
+
+     public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $this->Auth->allow(['index']);
+    }
+
+
+     public function isAuthorized($user)
+    {
+            if (isset($user['role']) && $user['role'] === 'admin') {
+                if (in_array($this->request->action, ['index', 'view', 'edit', 'delete']))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+
+                }
+            }
+
+        return parent::isAuthorized($user);
+    }
+
+
     public function index()
     {
 
@@ -36,23 +63,16 @@ class PartsController extends AppController
 
         $this->set(compact('parts'));
         $this->set('_serialize', ['parts']);
-        if($search = $this->request->query('q')){
+         $this->loadComponent('Search.Prg');
 
-        $conditions = array(
-                'conditions' => array(
-                    'or' => array(
-                        'Parts.id LIKE' => "%$search%",
-                        'Parts.name LIKE' => "%$search%",
-                        'Parts.price LIKE' => "%$search%",
-                    )
-                )
-            );
 
-            $this->set('parts', $this->paginate($this->Parts->find('all', $conditions)));
+        $query = $this->Parts
+        ->find('search', $this->request->query);
 
-         }else{
-            $this->set('parts', $this->paginate($this->Parts));
-         }
+
+
+
+        $this->set('parts', $this->paginate($query));
     }
 
     /**

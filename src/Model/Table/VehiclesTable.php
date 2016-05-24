@@ -6,6 +6,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Search\Manager;
 
 /**
  * Vehicles Model
@@ -26,6 +27,7 @@ class VehiclesTable extends Table
     {
         parent::initialize($config);
 
+        $this->addBehavior('Search.Search');
         $this->table('vehicles');
         $this->displayField('name');
         $this->primaryKey('id');
@@ -97,4 +99,25 @@ class VehiclesTable extends Table
         $rules->add($rules->existsIn(['type_id'], 'Types'));
         return $rules;
     }
+
+    public function searchConfiguration()
+    {
+     $search = new Manager($this);
+    $search
+    ->add('vehicle_id', 'Search.Value', [
+
+        'field' => $this->alias() . '.vehicle_id'
+    ])
+    ->add('V', 'Search.Like', [
+        //'Users.id Search.Like' => "%$search%",
+        //'Users.first_name Search.Like' => "%$search%",
+        'before' => true,
+        'after' => true,
+        'field' => [$this->alias('Name'),('Photo'),('Price')]
+
+
+    ]);
+    return $search;
+    }
 }
+

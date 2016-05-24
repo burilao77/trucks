@@ -6,20 +6,31 @@
 
 </div>
 
-    <div class="col-md-6">
+<div class="col-md-6">
         <div id="custom-search-input">
             <div class="input-group col-md-12">
-                <span class="input-group-btn">
-    <?= $this->Util->search($this->Form) ?>
-                </span>
-        <?php
-           if($search = $this->request->query('q')){
-               echo 'Filtrando por: '.$search.' - '.$this->Html->link(__('Ver todos'), ['action' => 'index']);
-           }
-        ?>
-            </div>
+
+
+
+       <?=
+         $this->Form->create(' ',['url' => ['controller' => 'Vehicles','action' => 'index'],
+        'type' => 'get']);?>
+
+     <?= $this->Form->input('V', ['class'=>'form-control input-lg','placeholder' => 'Buscar...', 'label' => false]);?>
+
+          </div>
         </div>
-    </div>
+          </div>
+    <div class="large-10 ">
+     <?= $this->Form->submit(__('Buscar'),['class' => 'btn btn-info btn-lg']);?>
+
+
+     <?= $this->Html->link('Reset', ['action' => 'index'],['class' => 'btn btn-info btn-lg']);?>
+
+     <?= $this->Form->end();?>
+</div>
+
+
 <div class="vehicles index large-12 medium-8 columns ">
 <table class="table table-bordered">
     <thead>

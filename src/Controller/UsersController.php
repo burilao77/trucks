@@ -20,8 +20,34 @@ class UsersController extends AppController
 public function initialize()
 {
     parent::initialize();
-    $this->Auth->allow(['logout', 'add', 'index']);
+    $this->Auth->allow();
 }
+
+
+     public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $this->Auth->allow(['index']);
+    }
+
+
+     public function isAuthorized($user)
+    {
+            if (isset($user['role']) && $user['role'] === 'admin') {
+                if (in_array($this->request->action, ['index', 'view', 'edit', 'delete']))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+
+                }
+            }
+
+        return parent::isAuthorized($user);
+    }
+
 
      public function login()
     {
@@ -75,6 +101,7 @@ public function initialize()
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->data);
+            $user->user_id = $this->Auth->user('id');
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
                 return $this->redirect(['action' => 'index']);
@@ -100,6 +127,7 @@ public function initialize()
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->data);
+            $user->user_id = $this->Auth->user('id');
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
                 return $this->redirect(['action' => 'index']);

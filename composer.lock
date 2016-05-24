@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0d40304596788b39b9295c031c350a34",
-    "content-hash": "c96d1add68e1c736a8a15146f97c6aa4",
+    "hash": "d249762ebac27bdb3307e5bcc46863d9",
+    "content-hash": "aa2bb772bef83b4236fe7b809dd8b01c",
     "packages": [
         {
             "name": "aura/installer-default",
@@ -342,6 +342,51 @@
             ],
             "description": "A composer installer for CakePHP 3.0+ plugins.",
             "time": "2016-04-28 03:01:34"
+        },
+        {
+            "name": "friendsofcake/search",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfCake/search.git",
+                "reference": "001baf45d1c2502d8f2f5f931556af8f8e4fe051"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfCake/search/zipball/001baf45d1c2502d8f2f5f931556af8f8e4fe051",
+                "reference": "001baf45d1c2502d8f2f5f931556af8f8e4fe051",
+                "shasum": ""
+            },
+            "require-dev": {
+                "cakephp/cakephp": "~3.0",
+                "friendsofcake/cakephp-test-utilities": "dev-master"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Search\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Winther",
+                    "homepage": "http://cakephp.nu/",
+                    "role": "Author"
+                }
+            ],
+            "description": "CakePHP 3.0 easy search framework",
+            "homepage": "https://github.com/FriendsOfCake/search",
+            "keywords": [
+                "cake3",
+                "cakephp",
+                "cakephp3",
+                "search"
+            ],
+            "time": "2016-05-17 15:22:34"
         },
         {
             "name": "josegonzalez/cakephp-upload",
@@ -1367,6 +1412,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "friendsofcake/search": 20,
         "psy/psysh": 0
     },
     "prefer-stable": true,

@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
 
 /**
  * Vehicles Controller
@@ -10,7 +11,6 @@ use App\Controller\AppController;
  */
 class VehiclesController extends AppController
 {
-
     /**
      * Index method
      *
@@ -28,6 +28,31 @@ class VehiclesController extends AppController
         $this->loadComponent('Paginator');
     }
 
+     public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $this->Auth->allow(['index']);
+    }
+
+
+     public function isAuthorized($user)
+    {
+            if (isset($user['role']) && $user['role'] === 'admin') {
+                if (in_array($this->request->action, ['index', 'view', 'edit', 'delete']))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+
+                }
+            }
+
+        return parent::isAuthorized($user);
+    }
+
+
     public function index()
     {
 
@@ -36,7 +61,18 @@ class VehiclesController extends AppController
         $this->set(compact('vehicles'));
         $this->set('_serialize', ['vehicles']);
 
-        if($search = $this->request->query('q')){
+        $this->loadComponent('Search.Prg');
+
+
+        $query = $this->Vehicles
+        ->find('search', $this->request->query);
+
+
+
+
+        $this->set('vehicles', $this->paginate($query));
+
+        /**if($search = $this->request->query('q')){
 
             $conditions = array(
                 'conditions' => array(
@@ -52,7 +88,8 @@ class VehiclesController extends AppController
 
          }else{
             $this->set('vehicles', $this->paginate($this->Vehicles));
-         }
+         }**/
+
     }
 
     /**
@@ -82,6 +119,7 @@ class VehiclesController extends AppController
         $vehicle = $this->Vehicles->newEntity();
         if ($this->request->is('post')) {
             $vehicle = $this->Vehicles->patchEntity($vehicle, $this->request->data);
+            $vehicle->user_id = $this->Auth->user('id');
             if ($this->Vehicles->save($vehicle)) {
                 $this->Flash->success(__('El Vehiculo fue guardado con Exito.'));
                 return $this->redirect(['action' => 'index']);
@@ -109,6 +147,7 @@ class VehiclesController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $vehicle = $this->Vehicles->patchEntity($vehicle, $this->request->data);
+
             if ($this->Vehicles->save($vehicle)) {
                 $this->Flash->success(__('The vehicle has been saved.'));
                 return $this->redirect(['action' => 'index']);

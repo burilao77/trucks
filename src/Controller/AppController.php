@@ -37,12 +37,22 @@ class AppController extends Controller
      *
      * @return void
      */
+
+    public function isAuthorized($user)
+    {
+            // el admin puede acer todas las acciones
+    if (isset($user['role']) && $user['role'] === 'admin') {
+        return true;
+    }
+        return false;
+    }
+
+
     public function initialize()
     {
-        parent::initialize();
 
-        $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+        $this->loadComponent('Search.Prg');
          $this->loadComponent('Auth', [
             'authorize'=> 'Controller',
             'authenticate' => [
@@ -66,13 +76,14 @@ class AppController extends Controller
 
         // Allow the display action so our pages controller
         // continues to work.
-        $this->Auth->allow(['display', 'add', 'index']);
+        $this->Auth->allow(['display', 'view', 'index']);
     }
 
 
     public function beforeFilter(Event $event)
     {
-        $this->Auth->allow(['index', 'home', 'login']);
+        $this->Auth->allow(['index']);
+
     }
 
 
