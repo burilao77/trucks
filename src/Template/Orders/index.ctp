@@ -19,8 +19,8 @@
                 <th><?= $this->Paginator->sort('customer') ?></th>
                 <th><?= $this->Paginator->sort('email') ?></th>
                 <th><?= $this->Paginator->sort('user_id') ?></th>
-                <th><?= $this->Paginator->sort('created') ?></th>
-                <th><?= $this->Paginator->sort('modified') ?></th>
+                <th><?= $this->Paginator->sort('partes') ?></th>
+                <th><?= $this->Paginator->sort('vehiculos') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -31,8 +31,8 @@
                 <td><?= h($order->customer) ?></td>
                 <td><?= h($order->email) ?></td>
                 <td><?= $order->has('user') ? $this->Html->link($order->user->id, ['controller' => 'Users', 'action' => 'view', $order->user->id]) : '' ?></td>
-                <td><?= h($order->created) ?></td>
-                <td><?= h($order->modified) ?></td>
+
+
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $order->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $order->id]) ?>

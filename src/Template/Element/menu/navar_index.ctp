@@ -3,26 +3,26 @@
 		<div class="container">
 			<div class="header">
 				<div class="head-logo">
-					<a href="index.html"><img src="images/logo.png" alt="" /></a>
+					<a href="index.html"><?= $this->Html->image('logo.png') ?></a>
 				</div>
 				<div class="top-nav">
-					<span class="menu"><img src="images/menu.png" alt=""></span>
+					<span class="menu"><?= $this->Html->image('menu.png') ?></span>
 					<ul class="nav1">
-						<li class="hvr-sweep-to-bottom"><a <?= $this->Html->link(__('Inicio'), ['controller' => 'Users', 'action' => 'login'])?> <center><img src="images/nav-but1.png" alt=""/></center><i>
-                        </i></a>
-                        </li>
+            <li class="hvr-sweep-to-bottom">
+              <?= $this->Html->link('Inicio <i>' . $this->Html->image('nav-but1.png') . '</i>', ['controller' => 'Users', 'action' => 'login'], ['escape' => false]) ?>
+            </li>
                         <li class="hvr-sweep-to-bottom"><a data-toggle="modal" data-target="#myModal">Ingresar<center><img src="images/nav-but2.png" alt=""/></center><i>
                         </i></a>
                         </li>
-                        <li class="hvr-sweep-to-bottom"><a <?= $this->Html->link(__('Repuestos'), ['controller' => 'Parts', 'action' => 'index'])?> <center><img src="images/nav-but3.png" alt=""/></center><i>
-                        </i></a>
-                        </li>
-                        <li class="hvr-sweep-to-bottom active"><a <?= $this->Html->link(__('Camiones'), ['controller' => 'Vehicles', 'action' => 'index'])?> <center><img src="images/nav-but4.png" alt=""/></center><i>
-                        </i></a>
-                        </li>
-                        <li class="hvr-sweep-to-bottom"><a <?= $this->Html->link(__('Contactanos'), ['controller' => 'Orders', 'action' => 'add'])?> <center><img src="images/nav-but5.png" alt=""/></center><i>
-                        </i></a>
-                        </li>
+            <li class="hvr-sweep-to-bottom">
+              <?= $this->Html->link('Respuestos <i>' . $this->Html->image('nav-but3.png') . '</i>', ['controller' => 'Parts', 'action' => 'index'], ['escape' => false]) ?>
+            </li>
+            <li class="hvr-sweep-to-bottom active">
+              <?= $this->Html->link('Camiones <i>' . $this->Html->image('nav-but4.png') . '</i>', ['controller' => 'Vehicles', 'action' => 'index'], ['escape' => false]) ?>
+            </li>
+            <li class="hvr-sweep-to-bottom">
+              <?= $this->Html->link('Contactanos <i>' . $this->Html->image('nav-but5.png') . '</i>', ['controller' => 'Orders', 'action' => 'add'], ['escape' => false]) ?>
+            </li>
 
                         <div class="clearfix"> </div>
 					</ul>

@@ -17,24 +17,25 @@ class UsersController extends AppController
      * @return \Cake\Network\Response|null
      */
 
-public function initialize()
-{
+    public function initialize()
+    {
     parent::initialize();
-    $this->Auth->allow();
-}
+    $this->Auth->allow(['logout', 'add', 'index']);
+    }
 
 
      public function beforeFilter(Event $event)
+
     {
         parent::beforeFilter($event);
-        $this->Auth->allow(['index']);
+        $this->Auth->allow(['add', 'login']);
     }
 
 
      public function isAuthorized($user)
     {
             if (isset($user['role']) && $user['role'] === 'admin') {
-                if (in_array($this->request->action, ['index', 'view', 'edit', 'delete']))
+                if (in_array($this->request->action, ['index', 'view', 'add']))
                 {
                     return true;
                 }
@@ -55,14 +56,17 @@ public function initialize()
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
+                $this->Flash->success(__('Bienvenido Administrador'));
                 return $this->redirect($this->Auth->redirectUrl());
+
             }
-            $this->Flash->error(__('Invalid username or password, try again'));
+            $this->Flash->error(__('Usuario o Contraseña Incorrecta'));
         }
     }
 
     public function logout()
     {
+         $this->Flash->success(__('Usted salio correctamente'));
         return $this->redirect($this->Auth->logout());
     }
 

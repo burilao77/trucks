@@ -50,9 +50,8 @@ class AppController extends Controller
 
     public function initialize()
     {
-
+         //$this->loadComponent('Search.Prg');    arruina el logueo de usuarios
         $this->loadComponent('Flash');
-        $this->loadComponent('Search.Prg');
          $this->loadComponent('Auth', [
             'authorize'=> 'Controller',
             'authenticate' => [
@@ -76,13 +75,13 @@ class AppController extends Controller
 
         // Allow the display action so our pages controller
         // continues to work.
-        $this->Auth->allow(['display', 'view', 'index']);
+        $this->Auth->allow(['display', 'add', 'index']);
     }
 
 
     public function beforeFilter(Event $event)
     {
-        $this->Auth->allow(['index']);
+        $this->Auth->allow(['index', 'home', 'login']);
 
     }
 

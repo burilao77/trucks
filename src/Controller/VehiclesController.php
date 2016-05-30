@@ -38,7 +38,7 @@ class VehiclesController extends AppController
      public function isAuthorized($user)
     {
             if (isset($user['role']) && $user['role'] === 'admin') {
-                if (in_array($this->request->action, ['index', 'view', 'edit', 'delete']))
+                if (in_array($this->request->action, ['index', 'edit', 'delete']))
                 {
                     return true;
                 }
@@ -147,7 +147,7 @@ class VehiclesController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $vehicle = $this->Vehicles->patchEntity($vehicle, $this->request->data);
-
+            $vehicle->user_id = $this->Auth->user('id');
             if ($this->Vehicles->save($vehicle)) {
                 $this->Flash->success(__('The vehicle has been saved.'));
                 return $this->redirect(['action' => 'index']);
