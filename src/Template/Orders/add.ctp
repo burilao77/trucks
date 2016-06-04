@@ -23,13 +23,14 @@
 
         <fieldset>
             <?php
-                echo $this->Form->input('customer', ['label' => false, 'placeholder' => 'Su nombre']);
-                echo $this->Form->input('email', ['label' => false, 'placeholder' => 'Correo']);
-                echo $this->Form->input('user_id', ['label' => false, 'options' => $users, 'empty' => 'seleccione vendedor']);
+                echo $this->Form->input('customer', ['placeholder' => 'Su nombre']);
+                echo $this->Form->input('email', ['placeholder' => 'Correo']);
+                echo $this->Form->input('phone');
+                echo $this->Form->input('user_id', ['options' => $users, 'empty' => 'seleccione vendedor']);
 
-                echo $this->Form->input('parts._ids' ,[ 'options' => $parts, 'type' => 'select', 'empty' => 'Seleccione una Repuesto']);
+                echo $this->Form->input('parts._ids' ,[ 'options' => $parts, 'type' => 'select','multiple' => true]);
 
-                echo $this->Form->input('vehicles._ids', ['options' => $vehicles, 'type' => 'select', 'empty' => 'Seleccione un Vehiculo']);
+                echo $this->Form->input('vehicles._ids', ['options' => $vehicles, 'type' => 'select', 'multiple' => true]);
             ?>
         </fieldset>
         <?= $this->Form->button(__('Submit')) ?>

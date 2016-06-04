@@ -7,7 +7,8 @@
         <li><?= $this->Html->link(__('List Parts'), ['controller' => 'Parts', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Part'), ['controller' => 'Parts', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Vehicles'), ['controller' => 'Vehicles', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Vehicle'), ['controller' => 'Vehicles', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('New Vehicle'), ['controller' => 'Vehicles', 'action' => 'add']) ?></li> 
+        <li><?= $this->Html->link(__('Logout'), ['controller' => 'Users', 'action' => 'logout']) ?></li>
     </ul>
 </nav>
 <div class="orders index large-9 medium-8 columns content">
@@ -18,9 +19,10 @@
                 <th><?= $this->Paginator->sort('id') ?></th>
                 <th><?= $this->Paginator->sort('customer') ?></th>
                 <th><?= $this->Paginator->sort('email') ?></th>
+                <th><?= $this->Paginator->sort('phone') ?></th>
+
                 <th><?= $this->Paginator->sort('user_id') ?></th>
-                <th><?= $this->Paginator->sort('partes') ?></th>
-                <th><?= $this->Paginator->sort('vehiculos') ?></th>
+                
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -30,7 +32,11 @@
                 <td><?= $this->Number->format($order->id) ?></td>
                 <td><?= h($order->customer) ?></td>
                 <td><?= h($order->email) ?></td>
-                <td><?= $order->has('user') ? $this->Html->link($order->user->id, ['controller' => 'Users', 'action' => 'view', $order->user->id]) : '' ?></td>
+                <td><?= h($order->phone) ?></td>
+                <td><?= h($order->user_id) ?></td>
+                
+
+                
 
 
                 <td class="actions">
@@ -41,7 +47,9 @@
             </tr>
             <?php endforeach; ?>
         </tbody>
+
     </table>
+
     <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->prev('< ' . __('previous')) ?>

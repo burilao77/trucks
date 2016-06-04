@@ -32,13 +32,14 @@ class VehiclesController extends AppController
     {
         parent::beforeFilter($event);
         $this->Auth->allow(['index']);
+        //$t=$this->Auth->config('authError', "Woopsie, you are not authorized to access this area.");
     }
 
 
      public function isAuthorized($user)
     {
             if (isset($user['role']) && $user['role'] === 'admin') {
-                if (in_array($this->request->action, ['index', 'edit', 'delete']))
+                if (in_array($this->request->action, ['index', 'view', 'edit', 'delete']))
                 {
                     return true;
                 }

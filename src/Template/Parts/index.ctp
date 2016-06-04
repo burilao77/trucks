@@ -2,6 +2,7 @@
 <div class="about-top">
 <div class="container">
 <div class="about-info wow fadeInLeft animated" data-wow-delay="0.4s" style="visibility: visible; -webkit-animation-delay: 0.4s;">
+<?= $this->Flash->render('auth') ?>
 <h3>Repuestos y Partes</h3>
 
 <div class="col-md-6">
@@ -39,6 +40,7 @@
                 <th><?= $this->Paginator->sort('Nombre') ?></th>
                 <th><?= $this->Paginator->sort('Foto') ?></th>
                 <th><?= $this->Paginator->sort('Precio') ?></th>
+                <th><?= $this->Paginator->sort('Descripcion') ?></th>
                 <th><?= $this->Paginator->sort('Categoria') ?></th>
 
                 <th class="actions"><?= __('Acciones') ?></th>
@@ -51,10 +53,11 @@
                 <td><?= h($part->name) ?></td>
                 <td><?= $this->Html->image('../files/Parts/photo/' .  '/' . $part->photo) ?></td>
                 <td><?= $this->Number->format($part->price) ?></td>
+                <td><?= $this->Text->autoParagraph(h($part->description)); ?></td>
                 <td><?= $part->has('category') ? $this->Html->link($part->category->title, ['controller' => 'Categories', 'action' => 'view', $part->category->id]) : '' ?></td>
 
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $part->id]) ?>
+                    
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $part->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $part->id], ['confirm' => __('Are you sure you want to delete # {0}?', $part->id)]) ?>
                 </td>

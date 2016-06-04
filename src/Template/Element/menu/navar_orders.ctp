@@ -26,6 +26,9 @@
             <li class="hvr-sweep-to-bottom active">
               <?= $this->Html->link('Contactanos <i>' . $this->Html->image('nav-but5.png') . '</i>', ['controller' => 'Orders', 'action' => 'add'], ['escape' => false]) ?>
             </li>
+            <li class="hvr-sweep-to-bottom ">
+              <?= $this->Html->link('Logout <i>' . $this->Html->image('nav-but2.png') . '</i>', ['controller' => 'Users', 'action' => 'logout'], ['escape' => false]) ?>
+            </li>
 
                         <div class="clearfix"> </div>
 					</ul>
@@ -56,7 +59,7 @@
                 <h4 class="modal-title">Ingrese sus Datos</h4>
               </div>
               <div class="modal-body">
-                <?= $this->Flash->render('auth') ?>
+                
                 <?= $this->Form->create() ?>
                     <fieldset>
                         <?= $this->Form->input('username') ?>

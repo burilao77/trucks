@@ -2,7 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\Event\Event;
 /**
  * Types Controller
  *
@@ -16,6 +16,34 @@ class TypesController extends AppController
      *
      * @return \Cake\Network\Response|null
      */
+
+    public function initialize()
+    {
+    parent::initialize();
+    $this->Auth->deny(['view']);
+    }
+
+
+     public function beforeFilter(Event $event)
+
+    {
+        parent::beforeFilter($event);
+        $this->Auth->allow(['add', 'login','logout']);
+    }
+
+
+     public function isAuthorized($user)
+    {
+            if (isset($user['role']) && $user['role'] === 'admin') {
+                if (in_array($this->request->action, ['index', 'view', 'add','edit', 'logout']))
+                {
+                    return true;
+                }
+                
+            }
+
+        return parent::isAuthorized($user);
+    }
     public function index()
     {
         $types = $this->paginate($this->Types);

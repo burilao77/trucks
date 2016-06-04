@@ -53,7 +53,7 @@
                 <h4 class="modal-title">Ingrese sus Datos</h4>
               </div>
               <div class="modal-body">
-                <?= $this->Flash->render('auth') ?>
+                
                 <?= $this->Form->create() ?>
                     <fieldset>
                         <?= $this->Form->input('username') ?>

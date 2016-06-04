@@ -69,6 +69,12 @@ class OrdersTable extends Table
             ->email('email')
             ->requirePresence('email', 'create')
             ->notEmpty('email');
+            //**/
+         $validator
+            ->integer('phone')
+            ->requirePresence('phone', 'create')
+            ->notEmpty('phone');
+
 
         return $validator;
     }

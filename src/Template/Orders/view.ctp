@@ -25,6 +25,10 @@
             <td><?= h($order->email) ?></td>
         </tr>
         <tr>
+            <th><?= __('Phone') ?></th>
+            <td><?= h($order->phone) ?></td>
+        </tr>
+        <tr>
             <th><?= __('User') ?></th>
             <td><?= $order->has('user') ? $this->Html->link($order->user->id, ['controller' => 'Users', 'action' => 'view', $order->user->id]) : '' ?></td>
         </tr>

@@ -71,17 +71,18 @@ class AppController extends Controller
                 'controller' => 'Orders',
                 'action' => 'index'
             ]
+
         ]);
 
         // Allow the display action so our pages controller
         // continues to work.
-        $this->Auth->allow(['display', 'add', 'index']);
+        $this->Auth->allow(['display', 'add', 'view']);
     }
 
 
     public function beforeFilter(Event $event)
     {
-        $this->Auth->allow(['index', 'home', 'login']);
+        $this->Auth->allow(['home', 'login']);
 
     }
 
